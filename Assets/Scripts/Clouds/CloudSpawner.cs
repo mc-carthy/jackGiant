@@ -21,6 +21,11 @@ public class CloudSpawner : MonoBehaviour {
 		controlX = 0;
 		SetMinMaxX ();
 		CreateClouds ();
+		player = GameObject.FindGameObjectWithTag ("Player");
+	}
+
+	private void Start () {
+		PositionPlayer ();
 	}
 
 	private void SetMinMaxX () {
@@ -46,7 +51,7 @@ public class CloudSpawner : MonoBehaviour {
 		for (int i = 0; i < clouds.Length; i++) {
 			Vector3 temp = clouds [i].transform.position;
 			temp.y = posY;
-			temp.x = Random.Range (minX, maxX);
+
 			if (controlX == 0) {
 				temp.x = Random.Range (0.0f, maxX);
 				controlX = 1;
@@ -60,9 +65,39 @@ public class CloudSpawner : MonoBehaviour {
 				temp.x = Random.Range (-1.0f, minX);
 				controlX = 0;
 			}
+
 			lastCloudPosY = posY;
 			clouds [i].transform.position = temp;
 			posY -= distBetweenClouds;
 		}
+	}
+
+	private void PositionPlayer () {
+		GameObject[] darkClouds = GameObject.FindGameObjectsWithTag ("Deadly");
+		GameObject[] cloudsInGame = GameObject.FindGameObjectsWithTag ("Cloud");
+
+		for (int i = 0; i < darkClouds.Length; i++) {
+			if (darkClouds [i].transform.position.y == 0f) {
+				Vector3 temp0 = darkClouds [i].transform.position;
+
+				darkClouds [i].transform.position = new Vector3 (cloudsInGame [0].transform.position.x,
+																 cloudsInGame [0].transform.position.y,
+																 cloudsInGame [0].transform.position.z);
+
+				cloudsInGame [0].transform.position = temp0;
+			}
+		}
+
+		Vector3 temp1 = cloudsInGame [0].transform.position;
+
+		for (int i = 1; i < cloudsInGame.Length; i++) {
+			if (temp1.y < cloudsInGame [i].transform.position.y) {
+				temp1 = cloudsInGame [i].transform.position;
+			}
+		}
+
+		temp1.y += 1f;
+
+		player.transform.position = temp1;
 	}
 }
