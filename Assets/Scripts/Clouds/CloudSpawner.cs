@@ -17,12 +17,10 @@ public class CloudSpawner : MonoBehaviour {
 	private GameObject player;
 
 	private void Awake () {
-		//player = FindObjectOfType<PlayerController> ();
 		controlX = 0;
 		SetMinMaxX ();
 		CreateClouds ();
-		player = GameObject.FindGameObjectWithTag ("Player");
-
+		player = GameObject.Find ("player");
 		for (int i = 0; i < collectables.Length; i++) {
 			collectables [i].SetActive (false);
 		}
@@ -102,6 +100,7 @@ public class CloudSpawner : MonoBehaviour {
 
 		temp1.y += 1f;
 
+		print (player.gameObject.name);
 		player.transform.position = temp1;
 	}
 
