@@ -44,8 +44,5 @@ public class PlayerController : MonoBehaviour {
 			anim.SetBool ("Walk", false);
 		}
 		rb.AddForce(new Vector2 (forceX, 0));
-		//rb.velocity = new Vector2 (forceX, -7);
-
-		print (rb.velocity);
 	}
 }

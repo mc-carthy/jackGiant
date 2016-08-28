@@ -100,7 +100,6 @@ public class CloudSpawner : MonoBehaviour {
 
 		temp1.y += 1f;
 
-		print (player.gameObject.name);
 		player.transform.position = temp1;
 	}
 

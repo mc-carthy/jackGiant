@@ -8,7 +8,7 @@ public class PlayerScore : MonoBehaviour {
 	public static int coinCount;
 
 	[SerializeField]
-	private AudioClip coinClip, lifeClip;
+	private AudioClip coinClip = null, lifeClip = null;
 	private CameraController cameraScript;
 	private Vector3 previousPos;
 	private bool countScore;
@@ -30,6 +30,7 @@ public class PlayerScore : MonoBehaviour {
 		if (countScore) {
 			if (transform.position.y < previousPos.y) {
 				scoreCount++;
+				GameController.instance.SetScore (scoreCount);
 			}
 			previousPos = transform.position;
 		}
@@ -39,12 +40,16 @@ public class PlayerScore : MonoBehaviour {
 		if (col.tag == "Coin") {
 			coinCount++;
 			scoreCount += 200;
+			GameController.instance.SetScore (scoreCount);
+			GameController.instance.SetCoinScore (coinCount);
 			AudioSource.PlayClipAtPoint (coinClip, transform.position);
 			col.gameObject.SetActive (false);
 		}
 		if (col.tag == "Life") {
 			lifeCount++;
 			scoreCount += 300;
+			GameController.instance.SetScore (scoreCount);
+			GameController.instance.SetLifeScore (lifeCount);
 			AudioSource.PlayClipAtPoint (lifeClip, transform.position);
 			col.gameObject.SetActive (false);
 		}
@@ -53,12 +58,14 @@ public class PlayerScore : MonoBehaviour {
 			countScore = false;
 			transform.position = new Vector3 (500, 500, 0);
 			lifeCount--;
+			GameController.instance.SetLifeScore (lifeCount);
 		}
 		if (col.tag == "Deadly") {
 			cameraScript.moveCamera = false;
 			countScore = false;
 			transform.position = new Vector3 (500, 500, 0);
 			lifeCount--;
+			GameController.instance.SetLifeScore (lifeCount);
 		}
 
 	}
