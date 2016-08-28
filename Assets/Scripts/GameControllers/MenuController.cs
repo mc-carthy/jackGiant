@@ -5,6 +5,7 @@ using System.Collections;
 public class MenuController : MonoBehaviour {
 
 	public void StartGame () {
+		GameManager.instance.gameStartedFromMainMenu = true;
 		SceneManager.LoadScene ("main", LoadSceneMode.Single);
 	}
 

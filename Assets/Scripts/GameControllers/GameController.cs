@@ -34,6 +34,10 @@ public class GameController : MonoBehaviour {
 		StartCoroutine (GameOverLoadMainMenu ());
 	}
 
+	public void PlayerDiedRestartGame () {
+		StartCoroutine (PlayerDiedRestartLevel ());
+	}
+
 	public void SetScore (int score) {
 		scoreText.text = score.ToString();
 	}
@@ -43,6 +47,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void SetLifeScore (int score) {
+		if (score < 0) {
+			score = 0;
+		}
 		lifeText.text = "x" + score.ToString();
 	}
 
@@ -69,5 +76,10 @@ public class GameController : MonoBehaviour {
 	private IEnumerator GameOverLoadMainMenu () {
 		yield return new WaitForSeconds (3f);
 		SceneManager.LoadScene ("menu", LoadSceneMode.Single);
+	}
+
+	private IEnumerator PlayerDiedRestartLevel () {
+		yield return new WaitForSeconds (1f);
+		SceneManager.LoadScene ("main", LoadSceneMode.Single);
 	}
 }

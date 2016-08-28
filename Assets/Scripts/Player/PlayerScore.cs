@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerScore : MonoBehaviour {
 
 	public static int scoreCount;
-	public static int lifeCount = 1;
+	public static int lifeCount;
 	public static int coinCount;
 
 	[SerializeField]
@@ -62,9 +62,7 @@ public class PlayerScore : MonoBehaviour {
 			transform.position = new Vector3 (500, 500, 0);
 			lifeCount--;
 			GameController.instance.SetLifeScore (lifeCount);
-			if (lifeCount <= 0) {
-				GameController.instance.GameOverShowPanel (scoreCount, coinCount);
-			}
+			GameManager.instance.CheckGameStatus (scoreCount, coinCount, lifeCount);
 		}
 		if (col.tag == "Deadly") {
 			cameraScript.moveCamera = false;
@@ -72,9 +70,7 @@ public class PlayerScore : MonoBehaviour {
 			transform.position = new Vector3 (500, 500, 0);
 			lifeCount--;
 			GameController.instance.SetLifeScore (lifeCount);
-			if (lifeCount <= 0) {
-				GameController.instance.GameOverShowPanel (scoreCount, coinCount);
-			}
+			GameManager.instance.CheckGameStatus (scoreCount, coinCount, lifeCount);
 		}
 
 	}
