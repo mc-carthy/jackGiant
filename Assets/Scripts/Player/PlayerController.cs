@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour {
 				anim.SetBool ("Walk", true);
 				Vector3 temp = transform.localScale;
 				temp.x = 1.3f;
-				transform.localScale = temp;			}
+				transform.localScale = temp;			
+			}
 		} else if (h < 0) {
 			if (vel < maxVelocity) {
 				forceX = -speed;
