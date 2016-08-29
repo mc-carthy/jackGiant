@@ -8,10 +8,24 @@ public class CameraController : MonoBehaviour {
 
 	private float speed = 1f;
 	private float acc = 0.2f;
-	private float maxSpeed = 3.2f;
+	private float maxSpeed = 3.5f;
+
+	private float easySpeed = 3.5f;
+	private float mediumSpeed = 4f;
+	private float hardSpeed = 4.5f;
 
 	private void Start () {
 		moveCamera = true;
+
+		if (GamePreferences.GetEasyDifficulty () == 1) {
+			maxSpeed = easySpeed;
+		}
+		if (GamePreferences.GetMediumDifficulty () == 1) {
+			maxSpeed = mediumSpeed;
+		}
+		if (GamePreferences.GetHardDifficulty () == 1) {
+			maxSpeed = hardSpeed;
+		}
 	}
 
 	private void Update () {

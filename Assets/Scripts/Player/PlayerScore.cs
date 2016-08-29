@@ -56,7 +56,7 @@ public class PlayerScore : MonoBehaviour {
 			AudioSource.PlayClipAtPoint (lifeClip, transform.position);
 			col.gameObject.SetActive (false);
 		}
-		if (col.tag == "Bounds") {
+		if (col.tag == "Bounds" || col.tag == "Deadly") {
 			cameraScript.moveCamera = false;
 			countScore = false;
 			transform.position = new Vector3 (500, 500, 0);
@@ -64,15 +64,6 @@ public class PlayerScore : MonoBehaviour {
 			GameController.instance.SetLifeScore (lifeCount);
 			GameManager.instance.CheckGameStatus (scoreCount, coinCount, lifeCount);
 		}
-		if (col.tag == "Deadly") {
-			cameraScript.moveCamera = false;
-			countScore = false;
-			transform.position = new Vector3 (500, 500, 0);
-			lifeCount--;
-			GameController.instance.SetLifeScore (lifeCount);
-			GameManager.instance.CheckGameStatus (scoreCount, coinCount, lifeCount);
-		}
-
 	}
 
 }
