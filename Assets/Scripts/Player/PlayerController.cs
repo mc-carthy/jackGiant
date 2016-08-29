@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void FixedUpdate () {
-		PlayerMoveKeyboard ();
+		//PlayerMoveKeyboard ();
 	}
 
 	private void PlayerMoveKeyboard () {

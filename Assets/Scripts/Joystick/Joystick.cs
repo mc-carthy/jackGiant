@@ -20,8 +20,6 @@ public class Joystick : MonoBehaviour, IPointerUpHandler, IPointerDownHandler {
 	}
 
 	public void OnPointerUp (PointerEventData data) {
-		if (gameObject.name == "left") {
-			playerMove.StopMoving ();
-		}
+		playerMove.StopMoving ();
 	}
 }
