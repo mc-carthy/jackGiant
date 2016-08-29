@@ -16,13 +16,8 @@ public class GameManager : MonoBehaviour {
 		MakeSingleton ();
 	}
 
-	private void MakeSingleton () {
-		if (instance != null) {
-			Destroy (gameObject);
-		} else {
-			instance = this;
-			DontDestroyOnLoad (gameObject);
-		}
+	private void Start () {
+		InitialiseVariables ();
 	}
 
 	private void OnLevelWasLoaded () {
@@ -101,6 +96,35 @@ public class GameManager : MonoBehaviour {
 			gameStartedFromMainMenu = false;
 
 			GameController.instance.PlayerDiedRestartGame ();
+		}
+	}
+
+	private void MakeSingleton () {
+		if (instance != null) {
+			Destroy (gameObject);
+		} else {
+			instance = this;
+			DontDestroyOnLoad (gameObject);
+		}
+	}
+
+	private void InitialiseVariables () {
+		if (!PlayerPrefs.HasKey("GameInitialised")) {
+			GamePreferences.SetEasyDifficulty (0);
+			GamePreferences.SetEasyDifficultyCoinScore (0);
+			GamePreferences.SetEasyDifficultyHighScore (0);
+
+			GamePreferences.SetMediumDifficulty (1);
+			GamePreferences.SetMediumDifficultyCoinScore (0);
+			GamePreferences.SetMediumDifficultyHighScore (0);
+
+			GamePreferences.SetHardDifficulty (0);
+			GamePreferences.SetHardDifficultyCoinScore (0);
+			GamePreferences.SetHardDifficultyHighScore (0);
+
+			GamePreferences.SetMusicState (0);
+
+			PlayerPrefs.SetInt ("GameInitialised", 1);
 		}
 	}
 }
