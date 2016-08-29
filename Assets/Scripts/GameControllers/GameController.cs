@@ -70,16 +70,20 @@ public class GameController : MonoBehaviour {
 
 	public void QuitGame () {
 		Time.timeScale = 1f;
-		SceneManager.LoadScene ("menu", LoadSceneMode.Single);
+		//SceneManager.LoadScene ("menu", LoadSceneMode.Single);
+		SceneFader.instance.LoadLevel ("menu");
 	}
 
 	private IEnumerator GameOverLoadMainMenu () {
 		yield return new WaitForSeconds (3f);
-		SceneManager.LoadScene ("menu", LoadSceneMode.Single);
+		//SceneManager.LoadScene ("menu", LoadSceneMode.Single);
+		SceneFader.instance.LoadLevel ("menu");
 	}
 
 	private IEnumerator PlayerDiedRestartLevel () {
 		yield return new WaitForSeconds (1f);
-		SceneManager.LoadScene ("main", LoadSceneMode.Single);
+		//SceneManager.LoadScene ("main", LoadSceneMode.Single);
+		SceneFader.instance.LoadLevel ("main");
+
 	}
 }
